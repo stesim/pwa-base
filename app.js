@@ -63,7 +63,11 @@ export default class App {
       //   break;
       // }
       case 'activate-update': {
-        this._serviceWorker.waiting.postMessage('skip-waiting');
+        if (this._serviceWorker.waiting) {
+          this._serviceWorker.waiting.postMessage('skip-waiting');
+        } else {
+          logError('cannot activate update; none is pending');
+        }
         break;
       }
       case 'clear-cache': {
@@ -87,15 +91,12 @@ export default class App {
     } else {
       registration.addEventListener('updatefound', () => {
         const newWorker = registration.installing;
-        if (newWorker.state === 'installed') {
-          notifyController();
-        } else {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed') {
-              notifyController();
-            }
-          });
-        }
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' &&
+              navigator.serviceWorker.controller) {
+            notifyController();
+          }
+        });
       });
     }
   }
