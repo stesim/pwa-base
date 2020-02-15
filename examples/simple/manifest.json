@@ -1,0 +1,14 @@
+{
+  "name": "PWA Example",
+  "short_name": "PWAex",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [{
+    "src": "apple-touch-icon.png",
+    "type": "image/png",
+    "sizes": "180x180"
+  }]
+}
