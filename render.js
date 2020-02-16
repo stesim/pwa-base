@@ -1,6 +1,7 @@
 import DomComponent from './dom_component.js';
 import Variable from './variable.js';
 import Component from './component.js';
+import DomTextComponent from './dom_text_component.js';
 
 export default function render(tree) {
   const instance = (tree instanceof Component ? tree : renderToComponent(tree));
@@ -10,6 +11,8 @@ export default function render(tree) {
 function renderToComponent(tree) {
   if (tree instanceof Component) {
     return tree;
+  } else if (typeof tree === 'string') {
+    return new DomTextComponent(tree);
   }
 
   const instance = createComponentInstance(tree.type);
