@@ -45,6 +45,10 @@ export default class Component {
     }
   }
 
+  get variables() {
+    return this._variables;
+  }
+
   addVariableListener(variable, listener) {
     this._variableListeners.add({variable, listener});
     variable.onChange(listener);
