@@ -15,6 +15,10 @@ export default class Variable {
   }
 
   set value(value) {
+    this.set(value);
+  }
+
+  set(value) {
     if (value !== this._value) {
       this._value = value;
       invokeCallbacks(this._listeners, this._value);

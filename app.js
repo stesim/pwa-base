@@ -41,6 +41,14 @@ export default class App {
       .catch(error => alert(`Failed to initialize app.\n\n${error.stack}`));
   }
 
+  get dataStore() {
+    return this._dataStore;
+  }
+
+  get uiControllerChannel() {
+    return this._uiControllerCommunication;
+  }
+
   unload() {
     this._controllerComm.publish({type: 'unload'});
     document.body.removeChild(this._uiRootDomElement);

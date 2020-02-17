@@ -31,8 +31,11 @@ const proxyHandler = {
     return true;
   },
 
-  deleteProperty(target, key) {
-    throw new TypeError('cannot delete property of DataStore');
+  deleteProperty(target, key, receiver) {
+    delete target[key];
+    receiver[META_DATA].listeners.forEach(
+      listener => listener(key, undefined, receiver));
+    return true;
   },
 
   // ownKeys(target) { },
